@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Collegue } from './shared/domain/collegue'
+import { Collegue } from './shared/domain/collegue';
+import {CollegueService} from './shared/service/collegue.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,17 @@ import { Collegue } from './shared/domain/collegue'
 export class AppComponent implements OnInit {
   collegues:Collegue[]
   cachee:boolean
+  constructor(private collegueService:CollegueService){
+  }
   ngOnInit() {
     this.cachee = true
     this.collegues= new Array()
-    this.collegues.push(new Collegue("jambon","https://images-na.ssl-images-amazon.com/images/I/411RzrsBmBL._SY300_.jpg",20))
-    this.collegues.push(new Collegue("Ait-Ahmed","https://images-na.ssl-images-amazon.com/images/I/411RzrsBmBL._SY300_.jpg",19))
-    this.collegues.push(new Collegue("poisson","https://images-na.ssl-images-amazon.com/images/I/411RzrsBmBL._SY300_.jpg",18))
-    this.collegues.push(new Collegue("timon","https://images-na.ssl-images-amazon.com/images/I/411RzrsBmBL._SY300_.jpg",17))
-    this.collegues.push(new Collegue("pumba","https://images-na.ssl-images-amazon.com/images/I/411RzrsBmBL._SY300_.jpg",16))
-  }
+    this.collegueService.listerCollegues().then(collegue => collegue.forEach(c => this.collegues.push(c)))
+}
 
-  add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement,alert: HTMLDivElement) {
-    this.collegues.push(new Collegue(pseudo.value,imageUrl.value,0))
+  add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
+    let c = new Collegue(pseudo.value,imageUrl.value,50)
+    this.collegueService.sauvegarder(c).then(col => this.collegues.push(col))
     pseudo.value =""
     imageUrl.value=""
     this.cachee = false
