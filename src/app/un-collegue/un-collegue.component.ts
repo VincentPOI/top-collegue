@@ -17,13 +17,11 @@ export class UnCollegueComponent implements OnInit {
   }
 
   jaime() {
-    this.collegue.score += 10
-  this.collegueService.aimerUnCollegue(this.collegue)
+  this.collegueService.aimerUnCollegue(this.collegue).then(c => this.collegue.score = c.score)
     return false
   }
   jedeteste() {
-    this.collegue.score -= 5
-    this.collegueService.detesterUnCollegue(this.collegue)
+    this.collegueService.detesterUnCollegue(this.collegue).then(c => this.collegue.score = c.score)
     return false
   }
 

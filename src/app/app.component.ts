@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     let c = new Collegue(pseudo.value,imageUrl.value,50)
-    this.collegueService.sauvegarder(c).then(col => this.collegues.push(col))
+    this.collegueService.sauvegarder(c).then(col => (col == null)?null:this.collegues.push(col))
     pseudo.value =""
     imageUrl.value=""
     this.cachee = false
