@@ -11,20 +11,21 @@ import {CollegueService} from './shared/service/collegue.service';
 export class AppComponent implements OnInit {
   collegues:Collegue[]
   cachee:boolean
+  cacheeD:boolean
   constructor(private collegueService:CollegueService){
   }
   ngOnInit() {
     this.cachee = true
+    this.cacheeD = true
     this.collegues= new Array()
     this.collegueService.listerCollegues().then(collegue => collegue.forEach(c => this.collegues.push(c)))
-}
+  }
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     let c = new Collegue(pseudo.value,imageUrl.value,50)
-    this.collegueService.sauvegarder(c).then(col => (col == null)?null:this.collegues.push(col))
+    this.collegueService.sauvegarder(c).then(col => (col == null)?(this.cacheeD = false,this.cachee=true):(this.collegues.push(col),this.cacheeD = true,this.cachee=false))
     pseudo.value =""
     imageUrl.value=""
-    this.cachee = false
     return false
   }
 }

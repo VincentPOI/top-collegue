@@ -19,8 +19,11 @@
     <button (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
   </form>
 </div>
-<div class="alert alert-success" [hidden]="cachee" #alert id="alert">
+<div class="alert alert-success" [hidden]="cachee" >
   Le collegue {{collegues[collegues.length -1].nom}} a bien été sauvegardé
+</div>
+<div class="alert alert-danger" [hidden]="cacheeD" >
+  Le collegue existe déja!!!
 </div>
 <br>
 <div class="container">
