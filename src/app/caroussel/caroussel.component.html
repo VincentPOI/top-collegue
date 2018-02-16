@@ -2,7 +2,9 @@
   <ngb-carousel >
     <div *ngFor="let col of collegues">
       <ng-template ngbSlide>
-        <img class = "container justify-content-center"src={{col.imageUrl}} alt="Random first slide">
+        <a routerLink="/detail/{{col.nom}}">
+          <img class = "container justify-content-center"src={{col.imageUrl}} alt="Random first slide">
+        </a>
         <div class="carousel-caption">
           <h3 style="color:#000000;">{{col.nom}}</h3>
           <p style="color:#000000;">{{col.score}}</p>
