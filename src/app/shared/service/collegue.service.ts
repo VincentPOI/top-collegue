@@ -5,7 +5,9 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class CollegueService {
 
+
 	constructor(private http:HttpClient) {
+
 	}
 
 	listerCollegues():Promise<Collegue[]> {
@@ -26,5 +28,9 @@ export class CollegueService {
 		let body = {"action" : "detester"}
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue.nom
 		return this.http.patch<Collegue>(req,body).toPromise()
+	}
+	FindCollegueByNom(unCollegue:string):Promise<Collegue> {
+		let req:string = 'http://localhost:8080/collegues/'+unCollegue
+		return this.http.get<Collegue>(req).toPromise()
 	}
 }

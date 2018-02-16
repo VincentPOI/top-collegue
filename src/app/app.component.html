@@ -17,21 +17,40 @@
           <input type="text" id="imgUrl" placeholder="URL image" #imageUrl>
         </div>
       </div>
-      <button (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
+      <button (click)="add(pseudo, imageUrl)" class="btn btn-primary">Ajouter un nouveau collègue</button>
     </form>
-  </div>
-  <div class="alert alert-success" [hidden]="cachee" >
-    Le collegue {{collegues[collegues.length -1].nom}} a bien été sauvegardé
-  </div>
-  <div class="alert alert-danger" [hidden]="cacheeD" >
-    Le collegue existe déja!!!
+    <br>
   </div>
   <br>
-  <div class="flex-container center-block">
-    <div class="row">
-      <div *ngFor="let col of collegues">
-        <app-un-collegue [collegue]="col"></app-un-collegue>
-      </div>
-    </div>
-  </div>
+  <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+  <ngb-alert *ngIf="dangerMessage" type="danger" (close)="dangerMessage = null">{{ dangerMessage }}</ngb-alert>
+  <!-- <div class="alert alert-success" [hidden]="cachee" >
+    Le collegue {{colSaved}} a bien été sauvegardé
+  </div> -->
+  <!-- <div class="alert alert-danger" [hidden]="cacheeD" >
+    Le collegue existe déja!!!
+  </div> -->
+<ngb-tabset type="pills" >
+  <ngb-tab >
+    <ng-template ngbTabTitle><a routerLink="/classique" style="color:inherit">classique</a></ng-template>
+    <ng-template ngbTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab >
+    <ng-template ngbTabTitle><a routerLink="/tableau" style="color:inherit">Tableau</a></ng-template>
+    <ng-template ngbTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><a routerLink="/caroussel" style="color:inherit">Caroussel</a></ng-template>
+    <ng-template ngbTabContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+<br>
+
 </div>

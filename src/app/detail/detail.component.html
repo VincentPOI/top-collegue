@@ -1,0 +1,14 @@
+<br>
+<div class="container justify-content-md-center">
+  <div class="card justify-content-md-center mx-auto" style="width: 50rem;">
+    <img class="card-img-top" src={{collegue.imageUrl}}  height="600"  width="600"alt="Card image cap">
+    <div class="card-body">
+      <h4 class="text-center">{{collegue.nom}}</h4>
+      <h4 class="text-center">{{collegue.score}}</h4>
+    </div>
+    <div class="row justify-content-md-center">
+      <app-boutons [collegue]="collegue" [outline]="true"></app-boutons>
+    </div>
+    <br>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="flex-container center-block">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pseudo</th>
+          <th>Score</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let col of collegues">
+              <td><img src={{col.imageUrl}}  height="75"  width="75"></td>
+              <td>{{col.nom}}</td>
+              <td>{{col.score}}</td>
+              <td><app-boutons [collegue]="col" [outline]="true"></app-boutons></td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

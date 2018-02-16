@@ -6,10 +6,8 @@
       <h4 class="text-center">{{collegue.score}}</h4>
     </div>
     <div class="row justify-content-md-center">
-      <button type="button" class="btn btn-outline-primary " (click)="jaime()" >J'aime    </button>
-      <button type="button" class="btn btn-outline-danger " (click)="jedeteste()">Je déteste</button>
+      <app-boutons [collegue]=collegue ></app-boutons>
     </div>
-
     <br>
   </div>
 </div>
