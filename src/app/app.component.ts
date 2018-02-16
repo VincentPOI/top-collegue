@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router'
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Collegue } from './shared/domain/collegue';
 import {Subject} from 'rxjs/Subject';
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   private _danger = new Subject<string>();
   dangerMessage: string;
 
-  constructor(private collegueService:CollegueService){
+  constructor(private collegueService:CollegueService, private ar:Router){
   }
   ngOnInit() {
     this._success.subscribe((message) => this.successMessage = message);
@@ -30,10 +31,13 @@ export class AppComponent implements OnInit {
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     let c = new Collegue(pseudo.value,imageUrl.value,50)
     this.collegueService.sauvegarder(c)
-      .then(col => this._success.next(`Le collegue ${col.nom} a bien été sauvegardé (rechargez pour afficher)`))
-      .catch(()=> this._danger.next("Le collegue existe déja"));
+    .then(col => this._success.next(`Le collegue ${col.nom} a bien été sauvegardé (rechargez pour afficher)`))
+    .catch(()=> this._danger.next("Le collegue existe déja"));
     pseudo.value =""
     imageUrl.value=""
     return false
+  }
+  afficherForm(){
+    return ['/caroussel','/classique','/tableau'].some(a => a == this.ar.url)
   }
 }

@@ -1,13 +1,13 @@
 <div class="container">
-  <ngb-carousel >
+  <ngb-carousel>
     <div *ngFor="let col of collegues">
       <ng-template ngbSlide>
         <a routerLink="/detail/{{col.nom}}">
-          <img class = "container justify-content-center"src={{col.imageUrl}} alt="Random first slide">
+          <img class = "container justify-content-center"src={{col.imageUrl}} alt="Random first slide" style="max-height:400px;">
         </a>
         <div class="carousel-caption">
-          <h3 style="color:#000000;">{{col.nom}}</h3>
-          <p style="color:#000000;">{{col.score}}</p>
+          <h1 style="color:#000000;">{{col.nom}}</h1>
+          <h2 style="color:#000000;">{{col.score}}</h2>
           <app-boutons [collegue]="col" [outline]="false"></app-boutons>
         </div>
       </ng-template>

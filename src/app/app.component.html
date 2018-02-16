@@ -4,7 +4,7 @@
       Top Collègues
     </h1>
     <h5>Les meilleurs collègues du moment </h5>
-    <form>
+    <form *ngIf="afficherForm()">
       <div class="form-group row">
         <label for="pseudo">Pseudo</label>
         <div class="col-sm-10">
@@ -24,33 +24,11 @@
   <br>
   <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
   <ngb-alert *ngIf="dangerMessage" type="danger" (close)="dangerMessage = null">{{ dangerMessage }}</ngb-alert>
-  <!-- <div class="alert alert-success" [hidden]="cachee" >
-    Le collegue {{colSaved}} a bien été sauvegardé
-  </div> -->
-  <!-- <div class="alert alert-danger" [hidden]="cacheeD" >
-    Le collegue existe déja!!!
-  </div> -->
-<ngb-tabset type="pills" >
-  <ngb-tab >
-    <ng-template ngbTabTitle><a routerLink="/classique" style="color:inherit">classique</a></ng-template>
-    <ng-template ngbTabContent>
-      <router-outlet></router-outlet>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab >
-    <ng-template ngbTabTitle><a routerLink="/tableau" style="color:inherit">Tableau</a></ng-template>
-    <ng-template ngbTabContent>
-      <router-outlet></router-outlet>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab>
-    <ng-template ngbTabTitle><a routerLink="/caroussel" style="color:inherit">Caroussel</a></ng-template>
-    <ng-template ngbTabContent>
-      <router-outlet></router-outlet>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
-
-<br>
-
+  <nav *ngIf="afficherForm()" class="nav nav-pills flex-column flex-sm-row" >
+    <a class="flex-sm-fill text-sm-center nav-link " routerLink="/classique" routerLinkActive="active">Classique</a>
+    <a class="flex-sm-fill text-sm-center nav-link" routerLink="/tableau"  routerLinkActive="active">Tableau</a>
+    <a class="flex-sm-fill text-sm-center nav-link" routerLink="/caroussel"  routerLinkActive="active">caroussel</a>
+  </nav>
+  <hr>
+  <router-outlet></router-outlet>
 </div>
