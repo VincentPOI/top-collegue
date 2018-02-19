@@ -10,14 +10,15 @@ import {CollegueService} from '../shared/service/collegue.service';
 export class ClassiqueComponent implements OnInit {
 
   collegues:Collegue[]
-  nbCol:number = 4
+  nbCol:number = 8
   searched:string = ""
 
   constructor(private collegueService:CollegueService) { }
 
   ngOnInit() {
     this.collegues=new Array()
-    this.collegueService.listerCollegues().then(collegues => collegues.forEach( c => this.collegues.push(c)))
+    this.collegueService.listerCollegues().then(collegues => this.collegues = collegues)
+
   }
 
   setLimite(limite:HTMLInputElement){

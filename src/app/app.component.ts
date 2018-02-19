@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   private _danger = new Subject<string>();
   dangerMessage: string;
 
+
   constructor(private collegueService:CollegueService, private ar:Router){
   }
   ngOnInit() {

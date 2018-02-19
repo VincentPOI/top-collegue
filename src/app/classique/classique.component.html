@@ -6,7 +6,7 @@
       <div class="input-group-prepend">
         <div class="input-group-text">Limite</div>
       </div>
-      <input type="text" value=4 class="form-control" id="limite" placeholder="Limiter le nombre maximum de collègues affichés" (keyup)="setLimite(limite)" #limite>
+      <input type="text" value=8 class="form-control" id="limite" placeholder="Limiter le nombre maximum de collègues affichés" (keyup)="setLimite(limite)" #limite>
     </div>
   </form>
   <form>
@@ -20,7 +20,7 @@
   </form>
 
   <div class="row">
-    <div *ngFor="let col of collegues | pseudo:searched | slice:0:nbCol">
+    <div *ngFor="let col of collegues| tri | pseudo:searched  |slice:0:nbCol">
       <div class="container">
         <div class="card justify-content-md-center" style="width: 15rem;">
           <a routerLink="/detail/{{col.nom}}">

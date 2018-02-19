@@ -14,6 +14,7 @@ import { CarousselComponent } from './caroussel/caroussel.component';
 import { DetailComponent } from './detail/detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { PseudoPipe } from './shared/pipe/pseudo.pipe';
+import { TriPipe } from './shared/pipe/tri.pipe';
 
 
 const appRoutes: Routes = [
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     CarousselComponent,
     DetailComponent,
     ScorePipe,
-    PseudoPipe
+    PseudoPipe,
+    TriPipe
   ],
   imports: [
     BrowserModule,
