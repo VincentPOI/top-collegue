@@ -12,7 +12,7 @@
       <tbody>
             <tr *ngFor="let col of collegues">
               <td><a routerLink="/detail/{{col.nom}}"><img src={{col.imageUrl}}  height="75"  width="75"></a></td>
-              <td>{{col.nom}}</td>
+              <td>{{ col.nom | uppercase}}</td>
               <td>{{col.score}}</td>
               <td><app-boutons [collegue]="col" [outline]="true"></app-boutons></td>
             </tr>

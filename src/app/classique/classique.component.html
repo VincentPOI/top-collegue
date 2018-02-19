@@ -1,14 +1,34 @@
 <div class="flex-container center-block">
+
+  <form>
+    <label for="limite" class="sr-only">Limite</label>
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Limite</div>
+      </div>
+      <input type="text" value=4 class="form-control" id="limite" placeholder="Limiter le nombre maximum de collègues affichés" (keyup)="setLimite(limite)" #limite>
+    </div>
+  </form>
+  <form>
+    <button for="trinom" class="sr-only">Filtrer par pseudo</button>
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Filtrer par pseudo</div>
+      </div>
+      <input type="text" placeholder="rentrez un pseudo" class="form-control" id="trinom" #str (keyup)="search(str)">
+    </div>
+  </form>
+
   <div class="row">
-    <div *ngFor="let col of collegues">
+    <div *ngFor="let col of collegues | pseudo:searched | slice:0:nbCol">
       <div class="container">
         <div class="card justify-content-md-center" style="width: 15rem;">
           <a routerLink="/detail/{{col.nom}}">
             <img class="card-img-top" src={{col.imageUrl}}  height="200"  width="200"alt="Card image cap">
           </a>
           <div class="card-body">
-            <h4 class="text-center">{{col.nom}}</h4>
-            <h4 class="text-center">{{col.score}}</h4>
+            <h4 class="text-center">{{col.nom | uppercase}}</h4>
+            <h4 class='text-center' [innerHtml]="col.score | score"></h4>
           </div>
           <div class="row justify-content-md-center">
             <app-boutons [collegue]="col" [outline]="true"></app-boutons>

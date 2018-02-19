@@ -12,6 +12,8 @@ import { ClassiqueComponent } from './classique/classique.component';
 import { TableauComponent } from './tableau/tableau.component';
 import { CarousselComponent } from './caroussel/caroussel.component';
 import { DetailComponent } from './detail/detail.component';
+import { ScorePipe } from './shared/pipe/score.pipe';
+import { PseudoPipe } from './shared/pipe/pseudo.pipe';
 
 
 const appRoutes: Routes = [
@@ -31,7 +33,9 @@ const appRoutes: Routes = [
     ClassiqueComponent,
     TableauComponent,
     CarousselComponent,
-    DetailComponent
+    DetailComponent,
+    ScorePipe,
+    PseudoPipe
   ],
   imports: [
     BrowserModule,
