@@ -1,0 +1,15 @@
+<div class="card">
+  <h5 class="card-header">Historique</h5>
+  <div class="card-body" *ngFor="let v of votes">
+    <div class="row">
+      <div class="col">
+        <img src={{v.col.imageUrl}} alt="" height="150" width="150">
+      </div>
+      <div class="col">
+        <h5 class="card-title">{{v.col.nom}}</h5>
+        <p class="card-text">{{v.col.nom}} est {{judgement}}, il/elle a désormais un score de {{v.col.score}} {{emote}}</p>
+        <a href="#" class="" >Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>

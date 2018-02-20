@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
-import { Avis } from '../domain/avis';
+import { Vote } from '../domain/vote';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {AVIS} from '../domain/avisEnum'
 import 'rxjs/add/operator/map'
+import 'rxjs/add/observable/interval';
 
 @Injectable()
 export class CollegueService {
 
 	private collegueSub:Subject<Collegue> = new Subject();
 
-	private avisSub:Subject<Avis> =new Subject();
+	private avisSub:Subject<Vote> =new Subject();
 
 	get collegueObs():Observable<Collegue>{
 		return this.collegueSub
 	}
-	get avisObs():Observable<Avis>{
+	get avisObs():Observable<Vote>{
 		return this.avisSub
 	}
 
@@ -30,16 +32,14 @@ export class CollegueService {
 	}
 
 
-	sauvegarder2(newCollegue:Collegue):Observable<Collegue> {
-		const httpOptions = {
-			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-		};
-		const res = this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue,httpOptions);
-		res.subscribe(value => this.collegueSub.next(value))
-		return this.collegueObs
-		// this.collegueSub.next(newCollegue)
-		// return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue,httpOptions).toPromise()
-	}
+	// sauvegarder2(newCollegue:Collegue):Observable<Collegue> {
+	// 	const httpOptions = {
+	// 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+	// 	};
+	// 	const res = this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue,httpOptions);
+	// 	res.subscribe(value => this.collegueSub.next(value))
+	// 	return this.collegueObs
+	// }
 
 	sauvegarder(newCollegue:Collegue):Observable<Collegue> {
 		const httpOptions = {
@@ -50,17 +50,13 @@ export class CollegueService {
 			this.collegueSub.next(value)
 			return value;
 		}				)
-
-
-		// this.collegueSub.next(newCollegue)
-		// return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue,httpOptions).toPromise()
 	}
 
 
 	aimerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
 		let body = {"action" : "aimer"}
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue.nom
-		this.avisSub.next(new Avis(true,unCollegue.nom))
+		this.avisSub.next(new Vote(unCollegue,AVIS.LIKE))
 		return this.http.patch<Collegue>(req,body)
 	}
 
@@ -69,7 +65,7 @@ export class CollegueService {
 	detesterUnCollegue(unCollegue:Collegue):Observable<Collegue> {
 		let body = {"action" : "detester"}
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue.nom
-		this.avisSub.next(new Avis(false,unCollegue.nom))
+		this.avisSub.next(new Vote(unCollegue,AVIS.DISLIKE))
 		return this.http.patch<Collegue>(req,body)
 	}
 
@@ -78,6 +74,10 @@ export class CollegueService {
 	FindCollegueByNom(unCollegue:string):Observable<Collegue> {
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue
 		return this.http.get<Collegue>(req)
+	}
+
+	getHistoriqueVote():Observable<Vote[]>{
+		return this.http.get<Vote[]>( 'http://localhost:8080/votes')
 	}
 
 
