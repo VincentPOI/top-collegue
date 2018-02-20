@@ -19,6 +19,6 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.collegueService.FindCollegueByNom(this.pseudo).then(c => this.collegue = c)
+    this.collegueService.FindCollegueByNom(this.pseudo).subscribe(c => this.collegue = c)
     }
   }

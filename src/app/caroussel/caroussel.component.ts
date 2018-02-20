@@ -19,7 +19,8 @@ export class CarousselComponent implements OnInit {
       this.bP="btn btn-primary"
       this.bD="btn btn-danger"
       this.collegues=new Array()
-      this.collegueService.listerCollegues().then(collegues => collegues.forEach( c => this.collegues.push(c)))
+      this.collegueService.listerCollegues().subscribe(collegues => collegues.forEach( c => this.collegues.push(c)))
+      this.collegueService.collegueObs.subscribe(newCol => this.collegues.push(newCol))
     }
 
 }

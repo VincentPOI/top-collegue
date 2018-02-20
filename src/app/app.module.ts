@@ -15,6 +15,7 @@ import { DetailComponent } from './detail/detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { PseudoPipe } from './shared/pipe/pseudo.pipe';
 import { TriPipe } from './shared/pipe/tri.pipe';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     DetailComponent,
     ScorePipe,
     PseudoPipe,
-    TriPipe
+    TriPipe,
+    VotreDernierAvisComponent
   ],
   imports: [
     BrowserModule,

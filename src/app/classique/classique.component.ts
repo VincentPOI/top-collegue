@@ -17,13 +17,13 @@ export class ClassiqueComponent implements OnInit {
 
   ngOnInit() {
     this.collegues=new Array()
-    this.collegueService.listerCollegues().then(collegues => this.collegues = collegues)
+    this.collegueService.listerCollegues().subscribe(collegues => this.collegues = collegues)
+    this.collegueService.collegueObs.subscribe(newCol => this.collegues.push(newCol))
 
   }
 
   setLimite(limite:HTMLInputElement){
     this.nbCol= Number.parseInt(limite.value)
-    console.log(this.nbCol)
     return false
   }
 

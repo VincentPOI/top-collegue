@@ -25,7 +25,7 @@
   <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
   <ngb-alert *ngIf="dangerMessage" type="danger" (close)="dangerMessage = null">{{ dangerMessage }}</ngb-alert>
 
-
+  <app-votre-dernier-avis></app-votre-dernier-avis>
   <div *ngIf="afficherForm()">
     <nav  class="nav nav-pills flex-column flex-sm-row" >
       <a class="flex-sm-fill text-sm-center nav-link " routerLink="/classique" routerLinkActive="active">Classique</a>
@@ -36,4 +36,5 @@
 
   <hr>
   <router-outlet></router-outlet>
+<app-votre-dernier-avis></app-votre-dernier-avis>
 </div>

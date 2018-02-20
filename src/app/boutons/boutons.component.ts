@@ -18,11 +18,11 @@ export class BoutonsComponent implements OnInit {
   }
 
   jaime() {
-    this.collegueService.aimerUnCollegue(this.collegue).then(c => this.collegue.score = c.score)
+    this.collegueService.aimerUnCollegue(this.collegue).subscribe(c => this.collegue.score = c.score)
     return false
   }
   jedeteste() {
-    this.collegueService.detesterUnCollegue(this.collegue).then(c => this.collegue.score = c.score)
+    this.collegueService.detesterUnCollegue(this.collegue).subscribe(c => this.collegue.score = c.score)
     return false
   }
 

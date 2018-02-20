@@ -11,11 +11,12 @@ export class TableauComponent implements OnInit {
 
   collegues:Collegue[]
 
-    constructor(private collegueService:CollegueService) { }
+  constructor(private collegueService:CollegueService) { }
 
-    ngOnInit() {
-      this.collegues=new Array()
-      this.collegueService.listerCollegues().then(collegues => collegues.forEach( c => this.collegues.push(c)))
-    }
+  ngOnInit() {
+    this.collegues=new Array()
+    this.collegueService.listerCollegues().subscribe(collegues => collegues.forEach( c => this.collegues.push(c)))
+    this.collegueService.collegueObs.subscribe(newCol => this.collegues.push(newCol))
+  }
 
 }

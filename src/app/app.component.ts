@@ -32,8 +32,9 @@ export class AppComponent implements OnInit {
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     let c = new Collegue(pseudo.value,imageUrl.value,50)
     this.collegueService.sauvegarder(c)
-    .then(col => this._success.next(`Le collegue ${col.nom} a bien été sauvegardé (rechargez pour afficher)`))
-    .catch(()=> this._danger.next("Le collegue existe déja"));
+    .subscribe(
+      col => this._success.next(`Le collegue ${col.nom} a bien été sauvegardé`),
+      () => {this._danger.next("Le collegue existe déja")});
     pseudo.value =""
     imageUrl.value=""
     return false
