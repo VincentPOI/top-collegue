@@ -25,8 +25,4 @@ export class VotreDernierAvisComponent implements OnInit {
       })
     }
 
-    classAlert():string{
-      return this.classe
-    }
-
   }

@@ -11,9 +11,9 @@ export class CollegueService {
 
 	private collegueSub:Subject<Collegue> = new Subject();
 
-private avisSub:Subject<Avis> =new Subject();
+	private avisSub:Subject<Avis> =new Subject();
 
-get collegueObs():Observable<Collegue>{
+	get collegueObs():Observable<Collegue>{
 		return this.collegueSub
 	}
 	get avisObs():Observable<Avis>{
@@ -46,10 +46,10 @@ get collegueObs():Observable<Collegue>{
 			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 		};
 		return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue,httpOptions)
-				.map(value => {
-					this.collegueSub.next(value)
-					return value;
-}				)
+		.map(value => {
+			this.collegueSub.next(value)
+			return value;
+		}				)
 
 
 		// this.collegueSub.next(newCollegue)

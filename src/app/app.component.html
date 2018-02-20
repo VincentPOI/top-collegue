@@ -1,10 +1,12 @@
 <div class="container">
   <div class="container" style="background: #e4e3e6">
-    <h1>
-      Top Collègues
-    </h1>
+  <br>
+      <span class="{{statusClass}} float-right">{{status}}</span>
+      <h1>
+        Top Collègues
+      </h1>
     <h5>Les meilleurs collègues du moment </h5>
-    <form *ngIf="afficherForm()">
+    <form *ngIf="afficherForm()" >
       <div class="form-group row">
         <label for="pseudo">Pseudo</label>
         <div class="col-sm-10">
@@ -17,7 +19,7 @@
           <input type="text" id="imgUrl" placeholder="URL image" #imageUrl>
         </div>
       </div>
-      <button (click)="add(pseudo, imageUrl)" class="btn btn-primary">Ajouter un nouveau collègue</button>
+      <button (click)="add(pseudo, imageUrl)" class="btn btn-primary" [disabled]="disable" >Ajouter un nouveau collègue</button>
     </form>
     <br>
   </div>
