@@ -12,31 +12,24 @@
   </div>
   <form (ngSubmit)="submit(avisForm.value)" #avisForm="ngForm" (submit)="d('form validé')">
     <div class="modal-body">
-      <div class=form-group>
-        <div class="row">
-          <p><strong>Que pensez vous de {{collegue.nom}}?</strong></p>
+      <div class="form-group">
+        <label for="com">Que pensez vous de {{collegue.nom}}?</label>
+        <textarea  class="form-control" [(ngModel)]="avisModel.commentaire" #commentaire="ngModel" required minlength="3" maxlength="255"  name="commentaire" id="com" rows="6"></textarea>
+
+        <div *ngIf="commentaire.invalid && (commentaire.dirty || commentaire.touched)"
+        class="alert alert-danger">
+
+        <div *ngIf="commentaire.errors.required">
+          Name is required.
         </div>
-        <div class="row">
-          <div class="col-12">
-            <textarea [(ngModel)]="avisModel.commentaire" #commentaire="ngModel" required minlength="3" maxlength="255"  name="commentaire" rows="6"></textarea>
-
-              <div *ngIf="commentaire.invalid && (commentaire.dirty || commentaire.touched)"
-              class="alert alert-danger">
-
-              <div *ngIf="commentaire.errors.required">
-                Name is required.
-              </div>
-              <div *ngIf="commentaire.errors.minlength">
-                Name must be at least 3 characters long.
-              </div>
-            </div>
-
-          </div>
+        <div *ngIf="commentaire.errors.minlength">
+          Name must be at least 3 characters long.
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" [disabled]="commentaire.invalid" >Enregistrer</button>
-    </div>
-  </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="commentaire.invalid" >Enregistrer</button>
+  </div>
+</form>
 </ng-template>

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="container" style="background: #e4e3e6">
-  <br>
-      <span class="{{statusClass}} float-right">{{status}}</span>
-      <h1>
-        Top Collègues
-      </h1>
+    <br>
+    <span class="{{statusClass}} float-right">{{status}}</span>
+    <h1>
+      Top Collègues
+    </h1>
     <h5>Les meilleurs collègues du moment </h5>
     <form *ngIf="afficherForm()" >
       <div class="form-group row">
@@ -21,6 +21,8 @@
       </div>
       <button (click)="add(pseudo, imageUrl)" class="btn btn-primary" [disabled]="disable" >Ajouter un nouveau collègue</button>
     </form>
+    <button type="button" class="btn btn-link float-right" (click)="open(formAvisApp)">Donnez votre avis sur l'application top collegue </button>
+    <br>
     <br>
   </div>
   <br>
@@ -37,14 +39,47 @@
   </div>
 
   <hr>
-<div class="row">
-  <div class="col col-8">
-    <router-outlet></router-outlet>
+  <div class="row">
+    <div class="col col-8">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col col-4">
+      <app-historique></app-historique>
+    </div>
   </div>
-  <div class="col col-4">
-    <app-historique></app-historique>
-  </div>
+
+
+  <app-votre-dernier-avis></app-votre-dernier-avis>
 </div>
 
-<app-votre-dernier-avis></app-votre-dernier-avis>
-</div>
+
+<ng-template #formAvisApp  let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Votre avis compte</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form  [formGroup]="form"  (ngSubmit)="submitForm(form.value)">
+    <div class="modal-body">
+      <div class="form-group">
+        <p>Comment trouvez-vous l'application Top Collègues</p>
+        <div class="checkbox">
+          <label><input type="checkbox" value="mauvais" name="mauvais" [formControl]="form.controls['mauvais']">    Mauvais</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="bien" name="bien" [formControl]="form.controls['bien']">    Bien</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="excellent" name="excellent" [formControl]="form.controls['excellent']" >   Excellent</label>
+        </div>
+        <label for="com">Avez-vous des suggestions ?</label>
+        <textarea class="form-control" id="com" rows="5" [formControl]="form.controls['suggestion']"></textarea>
+        <br />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Enregistrer</button>
+    </div>
+  </form>
+</ng-template>

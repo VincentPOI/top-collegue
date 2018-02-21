@@ -8,6 +8,9 @@ import {CollegueService} from './shared/service/collegue.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup ,FormBuilder,Validators  } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -26,13 +29,22 @@ export class AppComponent implements OnInit {
   status:string
   statusClass:string
   disable:boolean
+  closeResult:string;
+  form:FormGroup;
 
-  constructor(private collegueService:CollegueService, private ar:Router){
+  constructor(private collegueService:CollegueService, private ar:Router,private modalService: NgbModal,private fb: FormBuilder){
     this.online = Observable.merge(
       Observable.of(navigator.onLine),
       Observable.fromEvent(window, 'online').mapTo(true),
       Observable.fromEvent(window, 'offline').mapTo(false)
     )
+
+    this.form = fb.group({
+      'suggestion':[null,Validators.required],
+      'mauvais':false,
+      'bien':false,
+      'excellent':true
+    })
   }
 
   ngOnInit() {
@@ -63,4 +75,30 @@ export class AppComponent implements OnInit {
     afficherForm(){
       return ['/caroussel','/classique','/tableau'].some(a => a == this.ar.url)
     }
+
+
+
+    open(formAvisApp) {
+      this.modalService.open(formAvisApp).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+
+    submitForm(value: any){
+      console.log(value);
+    }
+
   }

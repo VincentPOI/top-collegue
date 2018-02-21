@@ -5,7 +5,7 @@ import {CollegueService} from '../shared/service/collegue.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { FormControl, FormGroup ,FormBuilder,Validators  } from '@angular/forms';
+
 
 class AvisModel{commentaire:string}
 
