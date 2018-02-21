@@ -5,6 +5,7 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {AVIS} from '../domain/avisEnum'
+import {Avis} from '../domain/avis'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/interval';
 
@@ -13,12 +14,17 @@ export class CollegueService {
 
 	private collegueSub:Subject<Collegue> = new Subject();
 
-	private avisSub:Subject<Vote> =new Subject();
+	private voteSub:Subject<Vote> =new Subject();
+
+	private avisSub:Subject<Avis>=new Subject();
 
 	get collegueObs():Observable<Collegue>{
 		return this.collegueSub
 	}
-	get avisObs():Observable<Vote>{
+	get voteObs():Observable<Vote>{
+		return this.voteSub
+	}
+	get avisObs():Observable<Avis>{
 		return this.avisSub
 	}
 
@@ -56,7 +62,7 @@ export class CollegueService {
 	aimerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
 		let body = {"action" : "aimer"}
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue.nom
-		this.avisSub.next(new Vote(unCollegue,AVIS.LIKE))
+		this.voteSub.next(new Vote(unCollegue,AVIS.LIKE))
 		return this.http.patch<Collegue>(req,body)
 	}
 
@@ -65,7 +71,7 @@ export class CollegueService {
 	detesterUnCollegue(unCollegue:Collegue):Observable<Collegue> {
 		let body = {"action" : "detester"}
 		let req:string = 'http://localhost:8080/collegues/'+unCollegue.nom
-		this.avisSub.next(new Vote(unCollegue,AVIS.DISLIKE))
+		this.voteSub.next(new Vote(unCollegue,AVIS.DISLIKE))
 		return this.http.patch<Collegue>(req,body)
 	}
 
@@ -80,5 +86,19 @@ export class CollegueService {
 		return this.http.get<Vote[]>( 'http://localhost:8080/votes')
 	}
 
+	saveAvis(newAvis:Avis):Observable<Avis>{
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		};
+		return this.http.post<Avis>('http://localhost:8080/avis',newAvis,httpOptions)
+		.map(value => {
+			this.avisSub.next(value)
+			return value;
+		})
+	}
+
+	getAvisByCollegue(pseudo:string):Observable<Avis[]>{
+		return this.http.get<Avis[]>('http://localhost:8080/avis/'+pseudo)
+	}
 
 }

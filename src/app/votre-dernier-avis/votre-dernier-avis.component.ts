@@ -18,7 +18,7 @@ export class VotreDernierAvisComponent implements OnInit {
 
   ngOnInit() {
 
-    this.collegueService.avisObs.subscribe(lastVote =>{ this.personne = lastVote.col.nom;
+    this.collegueService.voteObs.subscribe(lastVote =>{ this.personne = lastVote.col.nom;
       (lastVote.avis==0)
           ? (this.classe="alert alert-info",this.judgement="J'aime")
           : (this.classe="alert alert-danger",this.judgement="Je n'aime pas")

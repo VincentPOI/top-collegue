@@ -17,6 +17,8 @@ import { PseudoPipe } from './shared/pipe/pseudo.pipe';
 import { TriPipe } from './shared/pipe/tri.pipe';
 import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 
 
 const appRoutes: Routes = [
@@ -47,7 +49,9 @@ const appRoutes: Routes = [
     BrowserModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [CollegueService],
   bootstrap: [AppComponent]

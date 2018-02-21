@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.collegueService.sauvegarder(c)
     .subscribe(
       col => this._success.next(`Le collegue ${col.nom} a bien été sauvegardé`),
-      () => {this._danger.next("Le collegue existe déja")});
+      () => this._danger.next("Le collegue existe déja"));
       pseudo.value =""
       imageUrl.value=""
       return false

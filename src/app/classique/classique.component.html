@@ -30,8 +30,12 @@
             <h4 class="text-center">{{col.nom | uppercase}}</h4>
             <h4 class='text-center' [innerHtml]="col.score | score"></h4>
           </div>
-          <div class="row justify-content-md-center">
-            <app-boutons [collegue]="col" [outline]="true"></app-boutons>
+          <div class="container">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-12 mx-auto">
+                <app-boutons [collegue]="col" [outline]="true"></app-boutons>
+              </div>
+            </div>
           </div>
           <br>
         </div>
